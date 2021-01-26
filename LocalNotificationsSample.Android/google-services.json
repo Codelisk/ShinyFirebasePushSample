@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "383778613471",
+    "project_id": "xamarin-test-8bc37",
+    "storage_bucket": "xamarin-test-8bc37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383778613471:android:afb81fe7178ffa62dd616a",
+        "android_client_info": {
+          "package_name": "com.minnick.localnotificationssample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383778613471-21musobkchfvk5jgm50s34huf83a01h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQzgMtS1ZSyxxT7NVJY213LaePvUcwvYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383778613471-21musobkchfvk5jgm50s34huf83a01h7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
