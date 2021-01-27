@@ -1,54 +1,25 @@
-﻿using System;
-using System.Threading.Tasks;
-using Shiny;
-using Shiny.Notifications;
-using Xamarin.Forms;
+﻿using DryIoc;
+using Prism;
+using Prism.DryIoc;
+using Prism.Ioc;
+using Shiny.Push;
 
 namespace LocalNotificationsSample
 {
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
         }
 
-        protected override async void OnStart()
+        protected override async void OnInitialized()
         {
-           // await SendNotificationNow();
-            //await ScheduleLocalNotification(DateTimeOffset.UtcNow.AddSeconds(2));
+            var result = await NavigationService.NavigateAsync("MainPage");
         }
-
-        async Task SendNotificationNow()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            var notification = new Notification
-            {
-                Id=1,
-                Title = "Testing Immediate Local Notifications",
-                Message = "It's working",
-                Channel = "ch1",
-                Android = new AndroidOptions()
-            };
-            var n = ShinyHost.Resolve<INotificationManager>();
-            var access=await n.RequestAccess();
-            await n.CreateChannel(new Channel { Identifier = "ch1" });
-            await n.Send(notification);
-        }
-
-        async Task ScheduleLocalNotification(DateTimeOffset scheduleDate)
-        {
-            var notification = new Notification
-            {
-                Title = "Testing Scheduled Local Notifications",
-                Message = $"Scheduled for {scheduleDate}",
-                ScheduleDate = scheduleDate,
-            };
-
-            var n = ShinyHost.Resolve<INotificationManager>();
-            var access =await n.RequestAccess();
-            await n.Send(notification);
+            containerRegistry.RegisterForNavigation<MainPage,MainPageViewModel>();
         }
     }
 }
