@@ -15,7 +15,6 @@ namespace LocalNotificationsSample
     {
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.UsePush<PushDelegate>();
             services.UseFirebaseMessaging<PushDelegate>();
         }
     }
