@@ -2,6 +2,7 @@
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Shiny;
 using Shiny.Push;
 
 namespace LocalNotificationsSample
@@ -20,6 +21,18 @@ namespace LocalNotificationsSample
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<MainPage,MainPageViewModel>();
+        }
+        protected override IContainerExtension CreateContainerExtension()
+        {
+            var container = new Container(this.CreateContainerRules());
+            ShinyHost.Populate((serviceType, func, lifetime) =>
+                container.RegisterDelegate(
+                    serviceType,
+                    _ => func(),
+                    Reuse.Singleton // I know everything is singleton
+                )
+            );
+            return new DryIocContainerExtension(container);
         }
     }
 }

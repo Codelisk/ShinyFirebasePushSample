@@ -9,9 +9,15 @@ namespace LocalNotificationsSample
 {
     public class MainPageViewModel
     {
+        IPushManager? pushManager;
         public MainPageViewModel(IPushManager? pushManager = null)
         {
-
+            this.pushManager = pushManager;
+            Init();
+        }
+        private async Task Init()
+        {
+            var test = await this.pushManager.RequestAccess();
         }
     }
 }
