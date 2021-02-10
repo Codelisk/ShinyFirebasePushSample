@@ -2,6 +2,7 @@
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Services;
 using Shiny;
 using Shiny.Push;
 using System.Threading.Tasks;
@@ -15,13 +16,17 @@ namespace LocalNotificationsSample
             InitializeComponent();
         }
 
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
-
-            var result = await NavigationService.NavigateAsync("MainPage");
+            Container.Resolve<IDeviceService>().BeginInvokeOnMainThread(async () =>
+            {
+                await Task.Delay(2000);
+                var result = await NavigationService.NavigateAsync("MainPage");
+            });
         }
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IDeviceService, DeviceService>();
             containerRegistry.RegisterForNavigation<MainPage,MainPageViewModel>();
         }
         protected override IContainerExtension CreateContainerExtension()
