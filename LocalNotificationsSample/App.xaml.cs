@@ -4,6 +4,7 @@ using Prism.DryIoc;
 using Prism.Ioc;
 using Shiny;
 using Shiny.Push;
+using System.Threading.Tasks;
 
 namespace LocalNotificationsSample
 {
@@ -16,6 +17,7 @@ namespace LocalNotificationsSample
 
         protected override async void OnInitialized()
         {
+
             var result = await NavigationService.NavigateAsync("MainPage");
         }
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
