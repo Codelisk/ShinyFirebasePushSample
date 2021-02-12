@@ -23,18 +23,11 @@ namespace LocalNotificationsSample
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<MainPage,MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<TestPage>();
         }
         protected override IContainerExtension CreateContainerExtension()
         {
-            var container = new Container(this.CreateContainerRules());
-            ShinyHost.Populate((serviceType, func, lifetime) =>
-                container.RegisterDelegate(
-                    serviceType,
-                    _ => func(),
-                    Reuse.Singleton // I know everything is singleton
-                )
-            );
-            return new DryIocContainerExtension(container);
+            return new DryIocContainerExtension(MyStartup.Container);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Shiny;
+﻿using Prism.Navigation;
+using Shiny;
 using Shiny.Notifications;
 using Shiny.Push;
 using System.Collections.Generic;
@@ -9,9 +10,13 @@ namespace LocalNotificationsSample
 {
     public class PushDelegate : IPushDelegate
     {
+        private readonly INavigationService navigationService1;
+        public PushDelegate(INavigationService navigationService)
+        {
+            navigationService1 = navigationService;
+        }
         public async Task OnEntry(PushEntryArgs args)
         {
-            
         }
 
         public async Task OnReceived(IDictionary<string, string> data)

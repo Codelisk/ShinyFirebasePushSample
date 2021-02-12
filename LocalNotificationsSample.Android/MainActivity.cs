@@ -19,6 +19,12 @@ namespace LocalNotificationsSample.Droid
             this.ShinyOnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        protected override void OnNewIntent(Intent intent)
+        {
+            this.ShinyOnNewIntent(intent);
+            base.OnNewIntent(intent);
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
