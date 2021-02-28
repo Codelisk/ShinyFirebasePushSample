@@ -30,9 +30,17 @@ namespace LocalNotificationsSample
 
         public async Task OnReceived(IDictionary<string, string> data)
         {
+            // We can check to show a notification if needed
+            var showNotification = false;
+            if (data.ContainsKey("show_notification"))
+            {
+                _ = bool.TryParse(data["show_notification"], out showNotification);
+            }
+
             var title = "default notification title";
             var message = "default notification message";
 
+            // we can write complex json data and deserialize it, if needed
             if (data.ContainsKey("title"))
                 title = data["title"];
 
