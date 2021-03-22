@@ -14,6 +14,6 @@
             HorizontalOptions="Center"
             Text="Welcome to Xamarin.Forms!"
             VerticalOptions="CenterAndExpand" />
-        <Button Clicked="Button_Clicked" />
+        <Button Clicked="Button_Clicked" Command="{Binding ClickCommand}" />
     </StackLayout>
 </ContentPage>

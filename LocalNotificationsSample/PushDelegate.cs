@@ -1,4 +1,5 @@
-﻿using Prism.Navigation;
+﻿using Prism.Ioc;
+using Prism.Navigation;
 using Shiny;
 using Shiny.Notifications;
 using Shiny.Push;
@@ -12,25 +13,17 @@ namespace LocalNotificationsSample
 {
     public class PushDelegate : IPushDelegate
     {
-        private readonly Lazy<INotificationManager> _notificationManager;
-        public static bool test = false;
 
-        public PushDelegate(Lazy<INotificationManager> notificationManager)
+        public PushDelegate()
         {
-            _notificationManager = notificationManager;
         }
 
         public async Task OnEntry(PushEntryArgs args)
         {
-            test = true;
-            MainPage.BColor();
-            var count = Preferences.Get("counter", 0);
-            Preferences.Set("counter", count + 1);
         }
 
         public async Task OnReceived(IDictionary<string, string> data)
-        {
-            // We can check to show a notification if needed
+        {// We can check to show a notification if needed
             var showNotification = false;
             if (data.ContainsKey("show_notification"))
             {
@@ -57,8 +50,8 @@ namespace LocalNotificationsSample
                         x => x.Value
                     )
             };
-
-            await _notificationManager.Value.Send(notification);
+            var n = App.Current.Container.Resolve<INotificationManager>();
+            await n.Send(notification);
         }
 
         public Task OnTokenChanged(string token)

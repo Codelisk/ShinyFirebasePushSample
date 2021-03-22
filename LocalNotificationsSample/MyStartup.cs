@@ -2,8 +2,12 @@
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Prism.DryIoc;
+using Prism.Ioc;
 using Shiny;
+using Shiny.Notifications;
 using System;
+using System.Collections.Generic;
 
 namespace LocalNotificationsSample
 {
@@ -13,23 +17,34 @@ namespace LocalNotificationsSample
 
         public override void ConfigureServices(IServiceCollection services, IPlatform platform)
         {
-            services.UseNotifications();
-            services.UseFirebaseMessaging<PushDelegate>();
+            var c = new Channel();
+            c.Identifier = "benach";
+            c.Importance = ChannelImportance.Critical;
+            c.Actions = new List<ChannelAction>
+            {
+                new ChannelAction
+                {
+                    Identifier="a",
+                    Title="OKAY",
+                    ActionType= ChannelActionType.OpenApp
+                },
+                new ChannelAction
+                {
+                    Identifier="o",
+                    Title="OKAY",
+                    ActionType= ChannelActionType.TextReply
+                }
+            };
+            services.UseFirebaseMessaging<PushDelegate>(c);
         }
 
         public override IServiceProvider CreateServiceProvider(IServiceCollection services)
         {
-            var container = new Container(Rules
-                .Default
-                .WithConcreteTypeDynamicRegistrations(reuse: Reuse.Transient)
-                .With(Made.Of(FactoryMethod.ConstructorWithResolvableArguments))
-                .WithFuncAndLazyWithoutRegistration()
-                .WithTrackingDisposableTransients()
-                .WithoutFastExpressionCompiler()
-                .WithFactorySelector(Rules.SelectLastRegisteredFactory())
-            );
+            // This registers and initializes the Container with Prism ensuring
+            // that both Shiny & Prism use the same container
+            ContainerLocator.SetContainerExtension(() => new DryIocContainerExtension());
+            var container = ContainerLocator.Container.GetContainer();
             DryIocAdapter.Populate(container, services);
-            Container = container;
             return container.GetServiceProvider();
         }
     }

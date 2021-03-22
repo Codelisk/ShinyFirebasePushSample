@@ -21,6 +21,7 @@ namespace LocalNotificationsSample
 
         private async void Button_Clicked(object sender, System.EventArgs e)
         {
+            return;
             var acc=await this._pushManager.RequestAccess();
             return;
         }
