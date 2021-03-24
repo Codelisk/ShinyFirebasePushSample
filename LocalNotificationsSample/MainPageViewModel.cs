@@ -13,36 +13,35 @@ namespace LocalNotificationsSample
     {
         IPushManager? pushManager;
         INotificationManager NotificationManager;
-        public MainPageViewModel(INotificationManager notificationManager, IPushManager? pushManager = null)
+        public MainPageViewModel(IPushManager pushManager)
         {
-            NotificationManager = notificationManager;
             this.pushManager = pushManager;
-            Init();
+            //Init();
         }
         private async Task Init()
         {
             var r=await pushManager.RequestAccess();
-            var c = new Channel();
-            c.Identifier = "benach";
-            c.Importance = ChannelImportance.Critical;
-            c.Actions = new List<ChannelAction>
-            {
-                new ChannelAction
-                {
-                    Identifier="o",
-                    Title="OKAY",
-                    ActionType= ChannelActionType.OpenApp
-                },
-                new ChannelAction
-                {
-                    Identifier="t",
-                    Title="Text Reply",
-                    ActionType= ChannelActionType.TextReply
-                }
-            };
-            await NotificationManager.CreateChannel(c);
-            await NotificationManager.SetChannels(c);
-            var allÖChannels=await NotificationManager.GetChannels();
+            //var c = new Channel();
+            //c.Identifier = "benach";
+            //c.Importance = ChannelImportance.Critical;
+            //c.Actions = new List<ChannelAction>
+            //{
+            //    new ChannelAction
+            //    {
+            //        Identifier="o",
+            //        Title="OKAY",
+            //        ActionType= ChannelActionType.OpenApp
+            //    },
+            //    new ChannelAction
+            //    {
+            //        Identifier="t",
+            //        Title="Text Reply",
+            //        ActionType= ChannelActionType.TextReply
+            //    }
+            //};
+            //await NotificationManager.CreateChannel(c);
+            //await NotificationManager.SetChannels(c);
+            //var allÖChannels=await NotificationManager.GetChannels();
             //var test = await this.pushManager.RequestAccess();
         }
 
@@ -52,11 +51,13 @@ namespace LocalNotificationsSample
 
         async void ExecuteClickCommand()
         {
-            var allÖChannels = await NotificationManager.GetChannels();
             var res = await this.pushManager.RequestAccess();
+            return;
+            var allChannels = await NotificationManager.GetChannels();
             await NotificationManager.Send(new Notification
             {
-                Channel = "benach",
+                Channel = "Test",
+                
                 Title = "Test",
                 Message="Hallo",
             });

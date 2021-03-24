@@ -12,11 +12,11 @@ namespace LocalNotificationsSample
     {
         public App()
         {
-            InitializeComponent();
         }
 
         protected override async void OnInitialized()
         {
+            InitializeComponent();
             var result = await NavigationService.NavigateAsync("MainPage");
             //if (PushDelegate.test && false)
             //{
@@ -31,10 +31,6 @@ namespace LocalNotificationsSample
         {
             containerRegistry.RegisterForNavigation<MainPage,MainPageViewModel>();
             containerRegistry.RegisterForNavigation<TestPage>();
-        }
-        protected override IContainerExtension CreateContainerExtension()
-        {
-            return new DryIocContainerExtension(MyStartup.Container);
         }
     }
 }

@@ -74,12 +74,6 @@
     <PackageReference Include="Prism.DryIoc.Forms">
       <Version>8.0.0.1909</Version>
     </PackageReference>
-    <PackageReference Include="Shiny.Core">
-      <Version>2.0.0.2542-preview</Version>
-    </PackageReference>
-    <PackageReference Include="Shiny.Push.FirebaseMessaging">
-      <Version>2.0.0.2542-preview</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Common">
       <Version>119.5.0</Version>
     </PackageReference>
@@ -133,6 +127,14 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj">
+      <Project>{0c7c4c2a-9694-4bbd-a129-a41e319a7e10}</Project>
+      <Name>Shiny.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj">
+      <Project>{130a7351-0eb6-4a17-8ea8-a392f2e4bdae}</Project>
+      <Name>Shiny.Push.FirebaseMessaging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LocalNotificationsSample\LocalNotificationsSample.csproj">
       <Project>{9A7BCF75-7A9B-41F3-96FE-E5E411C21805}</Project>
       <Name>LocalNotificationsSample</Name>

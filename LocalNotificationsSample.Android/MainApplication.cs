@@ -3,7 +3,6 @@ using Android.App;
 using Android.Runtime;
 using Firebase.Messaging;
 using Shiny;
-using Shiny.Notifications;
 
 namespace LocalNotificationsSample.Droid
 {
@@ -19,9 +18,6 @@ namespace LocalNotificationsSample.Droid
             base.OnCreate();
             this.ShinyOnCreate(new MyStartup());
 
-            AndroidOptions.DefaultLaunchActivityFlags = AndroidActivityFlags.FromBackground;
-            AndroidOptions.DefaultSmallIconResourceName = "icon";
-            AndroidOptions.DefaultLargeIconResourceName = "icon";
 
             FirebaseMessaging.Instance.SubscribeToTopic("all");
         }
