@@ -22,27 +22,6 @@ namespace LocalNotificationsSample
         private async Task Init()
         {
             var r=await pushManager.RequestAccess();
-            var c = new Channel();
-            c.Identifier = "benach";
-            c.Importance = ChannelImportance.Critical;
-            c.Actions = new List<ChannelAction>
-            {
-                new ChannelAction
-                {
-                    Identifier="o",
-                    Title="OKAY",
-                    ActionType= ChannelActionType.OpenApp
-                },
-                new ChannelAction
-                {
-                    Identifier="t",
-                    Title="Text Reply",
-                    ActionType= ChannelActionType.TextReply
-                }
-            };
-            await NotificationManager.CreateChannel(c);
-            await NotificationManager.SetChannels(c);
-            var allÖChannels=await NotificationManager.GetChannels();
             //var test = await this.pushManager.RequestAccess();
         }
 

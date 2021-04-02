@@ -29,12 +29,13 @@ namespace LocalNotificationsSample
         }
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IService1, Service1>();
             containerRegistry.RegisterForNavigation<MainPage,MainPageViewModel>();
             containerRegistry.RegisterForNavigation<TestPage>();
         }
-        protected override IContainerExtension CreateContainerExtension()
+        public static void RegisterBackgroundServices(IContainerRegistry containerRegistry)
         {
-            return new DryIocContainerExtension(MyStartup.Container);
+            containerRegistry.RegisterSingleton<IService1, Service1>();
         }
     }
 }

@@ -17,25 +17,27 @@ namespace LocalNotificationsSample
 
         public override void ConfigureServices(IServiceCollection services, IPlatform platform)
         {
-            var c = new Channel();
-            c.Identifier = "benach";
-            c.Importance = ChannelImportance.Critical;
-            c.Actions = new List<ChannelAction>
-            {
-                new ChannelAction
-                {
-                    Identifier="a",
-                    Title="OKAY",
-                    ActionType= ChannelActionType.OpenApp
-                },
-                new ChannelAction
-                {
-                    Identifier="o",
-                    Title="OKAY",
-                    ActionType= ChannelActionType.TextReply
-                }
+            var channels = new[] {
+                Channel.Create(
+                    "Test",
+                    ChannelAction.Create("Reply", ChannelActionType.TextReply),
+                    ChannelAction.Create("Yes"),
+                    ChannelAction.Create("No", ChannelActionType.Destructive)
+                ),
+                Channel.Create(
+                    "ChatName",
+                    ChannelAction.Create("Answer", ChannelActionType.TextReply)
+                ),
+                Channel.Create(
+                    "ChatAnswer",
+                    ChannelAction.Create("Yes"),
+                    ChannelAction.Create("No", ChannelActionType.Destructive)
+                )
             };
-            services.UseFirebaseMessaging<PushDelegate>(c);
+
+            services.UseNotifications<PushDelegate>();
+            // only pass channels to push or here, not both - technically you don't need this with push
+            services.UsePush<PushDelegate>();
         }
 
         public override IServiceProvider CreateServiceProvider(IServiceCollection services)
