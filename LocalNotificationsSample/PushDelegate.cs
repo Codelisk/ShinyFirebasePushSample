@@ -18,40 +18,18 @@ namespace LocalNotificationsSample
         {
         }
 
-        public async Task OnEntry(PushEntryArgs args)
+        public Task OnEntry(PushNotificationResponse response)
         {
+            throw new NotImplementedException();
         }
 
         public async Task OnReceived(IDictionary<string, string> data)
-        {// We can check to show a notification if needed
-            var showNotification = false;
-            if (data.ContainsKey("show_notification"))
-            {
-                _ = bool.TryParse(data["show_notification"], out showNotification);
-            }
+        {
+        }
 
-            var title = "default notification title";
-            var message = "default notification message";
-
-            // we can write complex json data and deserialize it, if needed
-            if (data.ContainsKey("title"))
-                title = data["title"];
-
-            if (data.ContainsKey("title"))
-                message = data["message"];
-
-            var notification = new Notification
-            {
-                Title = title,
-                Message = message,
-                // recast this as implementation types aren't serializing well
-                Payload = data?.ToDictionary(
-                        x => x.Key,
-                        x => x.Value
-                    )
-            };
-            var n = App.Current.Container.Resolve<INotificationManager>();
-            await n.Send(notification);
+        public async Task OnReceived(PushNotification notification)
+        {
+            Console.WriteLine("TEST");
         }
 
         public Task OnTokenChanged(string token)

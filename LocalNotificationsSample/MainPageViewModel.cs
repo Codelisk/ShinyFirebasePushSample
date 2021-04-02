@@ -17,7 +17,7 @@ namespace LocalNotificationsSample
         {
             NotificationManager = notificationManager;
             this.pushManager = pushManager;
-            Init();
+            pushManager.RequestAccess();
         }
         private async Task Init()
         {
@@ -40,7 +40,7 @@ namespace LocalNotificationsSample
                     ActionType= ChannelActionType.TextReply
                 }
             };
-            await NotificationManager.CreateChannel(c);
+            await NotificationManager.AddChannel(c);
             await NotificationManager.SetChannels(c);
             var allÖChannels=await NotificationManager.GetChannels();
             //var test = await this.pushManager.RequestAccess();

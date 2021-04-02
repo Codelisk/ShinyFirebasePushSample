@@ -21,8 +21,8 @@
   <ItemGroup>
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="5.1.0" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="8.0.0.1909" />
-    <PackageReference Include="Shiny.Core" Version="2.0.0.2542-preview" />
-    <PackageReference Include="Shiny.Push.FirebaseMessaging" Version="2.0.0.2542-preview" />
+    <PackageReference Include="Shiny.Core" Version="2.0.0.2579-preview" />
+    <PackageReference Include="Shiny.Push.FirebaseMessaging" Version="2.0.0.2579-preview" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
