@@ -17,7 +17,17 @@ namespace LocalNotificationsSample.iOS
             global::Xamarin.Forms.Forms.Init();
             this.ShinyFinishedLaunching(new MyStartup());
             LoadApplication(new App());
+if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
+    var pushSettings = UIUserNotificationSettings.GetSettingsForTypes (
+                       UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
+                       new NSSet ());
 
+    UIApplication.SharedApplication.RegisterUserNotificationSettings (pushSettings);
+    UIApplication.SharedApplication.RegisterForRemoteNotifications ();
+} else {
+    UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
+    UIApplication.SharedApplication.RegisterForRemoteNotificationTypes (notificationTypes);
+}
             return base.FinishedLaunching(app, options);
         }
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
