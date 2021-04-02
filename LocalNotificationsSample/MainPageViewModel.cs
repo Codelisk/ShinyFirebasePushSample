@@ -13,15 +13,24 @@ namespace LocalNotificationsSample
     {
         IPushManager? pushManager;
         INotificationManager NotificationManager;
-        public MainPageViewModel(INotificationManager notificationManager, IPushManager? pushManager = null)
+        public MainPageViewModel(INotificationManager notificationManager, IPushManager pushManager)
         {
             NotificationManager = notificationManager;
             this.pushManager = pushManager;
-            pushManager.RequestAccess();
+            Init();
         }
         private async Task Init()
         {
-            var r=await pushManager.RequestAccess();
+            try
+            {
+
+                var r = await pushManager.RequestAccess();
+            }
+            catch(Exception e)
+            {
+
+            }
+            return;
             var c = new Channel();
             c.Identifier = "benach";
             c.Importance = ChannelImportance.Critical;
@@ -52,7 +61,6 @@ namespace LocalNotificationsSample
 
         async void ExecuteClickCommand()
         {
-            var allÖChannels = await NotificationManager.GetChannels();
             var res = await this.pushManager.RequestAccess();
             await NotificationManager.Send(new Notification
             {

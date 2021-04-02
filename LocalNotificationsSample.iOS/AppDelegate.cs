@@ -15,6 +15,7 @@ namespace LocalNotificationsSample.iOS
             //Shiny.Push.FirebaseMessaging.Instance.SubscribeToTopic("all");
 
             global::Xamarin.Forms.Forms.Init();
+            this.ShinyFinishedLaunching(new MyStartup());
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
@@ -24,6 +25,10 @@ namespace LocalNotificationsSample.iOS
         public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
         => this.ShinyFailedToRegisterForRemoteNotifications(error);
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-        => this.ShinyRegisteredForRemoteNotifications(deviceToken);
+        {
+            this.ShinyRegisteredForRemoteNotifications(deviceToken);
+            var str=deviceToken.ToString();
+            Console.WriteLine(str);
+        }
     }
 }
