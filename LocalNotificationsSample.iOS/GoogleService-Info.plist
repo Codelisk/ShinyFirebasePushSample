@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>383778613471-1paqijk206g0hophehfmiji9qb66pdcm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.383778613471-1paqijk206g0hophehfmiji9qb66pdcm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBa9lNP0n1GvGPPzgFoIKXhLPK9p5STXUs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>383778613471</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>at.syPhone.iOS</string>
+	<key>PROJECT_ID</key>
+	<string>xamarin-test-8bc37</string>
+	<key>STORAGE_BUCKET</key>
+	<string>xamarin-test-8bc37.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:383778613471:ios:0ac39b7c87cd301fdd616a</string>
+</dict>
+</plist>
