@@ -145,4 +145,7 @@
       <Name>LocalNotificationsSample</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="GoogleService-Info.plist" />
+  </ItemGroup>
 </Project>
