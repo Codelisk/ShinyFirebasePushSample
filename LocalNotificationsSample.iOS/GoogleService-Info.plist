@@ -2,33 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>383778613471-1paqijk206g0hophehfmiji9qb66pdcm.apps.googleusercontent.com</string>
+	<string>802577801817-mhioko56qb4eav027cco05e4e4oudc7a.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.383778613471-1paqijk206g0hophehfmiji9qb66pdcm</string>
+	<string>com.googleusercontent.apps.802577801817-mhioko56qb4eav027cco05e4e4oudc7a</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBa9lNP0n1GvGPPzgFoIKXhLPK9p5STXUs</string>
+	<string>AIzaSyB87jq9LN5Ae-UtIslNAkJOeLzyKk7Ks9Y</string>
 	<key>GCM_SENDER_ID</key>
-	<string>383778613471</string>
+	<string>802577801817</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>at.syPhone.iOS</string>
 	<key>PROJECT_ID</key>
-	<string>xamarin-test-8bc37</string>
+	<string>syphone-1470142732026</string>
 	<key>STORAGE_BUCKET</key>
-	<string>xamarin-test-8bc37.appspot.com</string>
+	<string>syphone-1470142732026.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:383778613471:ios:0ac39b7c87cd301fdd616a</string>
+	<string>1:802577801817:ios:144ce74c205f5e09</string>
+	<key>DATABASE_URL</key>
+	<string>https://syphone-1470142732026.firebaseio.com</string>
 </dict>
 </plist>
