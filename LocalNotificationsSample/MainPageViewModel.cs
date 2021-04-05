@@ -24,7 +24,7 @@ namespace LocalNotificationsSample
             try
             {
 
-                var r = await pushManager.RequestAccess();
+                //var r = await pushManager.RequestAccess();
             }
             catch(Exception e)
             {
