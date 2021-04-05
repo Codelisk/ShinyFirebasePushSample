@@ -140,6 +140,9 @@
     <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging">
       <Version>4.7.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.InstanceID">
+      <Version>4.8.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
