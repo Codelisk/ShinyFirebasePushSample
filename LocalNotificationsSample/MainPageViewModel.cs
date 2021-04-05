@@ -13,11 +13,8 @@ namespace LocalNotificationsSample
     {
         IPushManager? pushManager;
         INotificationManager NotificationManager;
-        public MainPageViewModel(INotificationManager notificationManager, IPushManager pushManager)
+        public MainPageViewModel()
         {
-            NotificationManager = notificationManager;
-            this.pushManager = pushManager;
-            Init();
         }
         private async Task Init()
         {
