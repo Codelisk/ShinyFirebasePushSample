@@ -35,6 +35,7 @@ namespace LocalNotificationsSample
                     ActionType= ChannelActionType.TextReply
                 }
             };
+            services.UseFirebaseMessaging<PushDelegate>();
         }
 
         public override IServiceProvider CreateServiceProvider(IServiceCollection services)

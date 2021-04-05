@@ -13,8 +13,10 @@ namespace LocalNotificationsSample
     {
         IPushManager? pushManager;
         INotificationManager NotificationManager;
-        public MainPageViewModel()
+        public MainPageViewModel(IPushManager pushManager)
         {
+            this.pushManager = pushManager;
+            
         }
         private async Task Init()
         {
@@ -59,6 +61,8 @@ namespace LocalNotificationsSample
         async void ExecuteClickCommand()
         {
             var res = await this.pushManager.RequestAccess();
+            Console.WriteLine(res.RegistrationToken);
+            return;
             await NotificationManager.Send(new Notification
             {
                 Channel = "benach",

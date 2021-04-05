@@ -3,6 +3,7 @@ using Foundation;
 using ObjCRuntime;
 using Shiny;
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using UIKit;
 using UserNotifications;
@@ -44,93 +45,41 @@ namespace LocalNotificationsSample.iOS
 
             UIApplication.SharedApplication.RegisterForRemoteNotifications();
 
-            // Firebase component initialize
-            try
-            {
-                Firebase.Core.App.Configure();
+            
 
-            }
-            catch (Exception e)
-            {
+            //Messaging.SharedInstance.Delegate = this;
 
-            }
-
-            Messaging.SharedInstance.Delegate = this;
-
-            Firebase.InstanceID.InstanceId.Notifications.ObserveTokenRefresh((sender, e) =>
-            {
-                Firebase.InstanceID.InstanceId.SharedInstance.GetInstanceId((result, error) =>
-                {
-                    if (error == null)
-                    {
-                        string token = result.Token;
-                        Console.WriteLine("Got a notification token: " + token);
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("couldn't get Firebase Token: " + error);
-                    }
-                });
-
-                connectFCM();
-            });
             return base.FinishedLaunching(app, options);
         }
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
-            Messaging.SharedInstance.ApnsToken = deviceToken;
-            var tok=deviceToken.ToString();
-            var bytes = deviceToken.ToArray();
-            byte[] result = new byte[deviceToken.Length];
-            Marshal.Copy(deviceToken.Bytes, result, 0, (int)deviceToken.Length);
-
-            var token = BitConverter.ToString(result).Replace("-", "");
-            // Seems that there is no equivalent to SetApnsToken in the new version
-            //Firebase.InstanceID.InstanceId.SharedInstance.SetApnsToken(deviceToken, Firebase.InstanceID.ApnsTokenType.Unknown);
+            var token=ExtractToken(deviceToken);
+            Console.Write(token);
+            this.ShinyRegisteredForRemoteNotifications(deviceToken);
 
         }
-
+        private string ExtractToken(NSData deviceToken)
+        {
+            if (deviceToken.Length == 0)
+                return null;
+            var result = new byte[deviceToken.Length];
+            System.Runtime.InteropServices.Marshal.Copy(deviceToken.Bytes, result, 0, (int)deviceToken.Length);
+            return BitConverter.ToString(result).Replace("-", "");
+        }
+        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+        {
+            this.ShinyFailedToRegisterForRemoteNotifications(error);
+        }
 
 
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
         {
 
-            Messaging.SharedInstance.AppDidReceiveMessage(userInfo);
-
-            // Generate custom event
-            NSString[] keys = { new NSString("Event_type") };
-            NSObject[] values = { new NSString("Recieve_Notification") };
-            var parameters = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(keys, values, keys.Length);
-
-            // Send custom event
-            //Firebase.Analytics.Analytics.LogEvent("CustomEvent", parameters);
-
-            if (application.ApplicationState == UIApplicationState.Active)
-            {
-                System.Diagnostics.Debug.WriteLine(userInfo);
-                var aps_d = userInfo["aps"] as NSDictionary;
-                var alert_d = aps_d["alert"] as NSDictionary;
-                var body = alert_d["body"] as NSString;
-                var title = alert_d["title"] as NSString;
-                var category_d = aps_d["category"] as NSDictionary;
-            }
+            this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
         }
 
-
-        // iOS 10, fire when recieve notification foreground
-        [Export("userNotificationCenter:willPresentNotification:withCompletionHandler:")]
-        public void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
-        {
-            var title = notification.Request.Content.Title;
-            var body = notification.Request.Content.Body;
-            var view = notification.Request.Content.CategoryIdentifier;
-
-            debugAlert("Notification: " + title, body);
-
-        }
 
         public void ApplicationReceivedRemoteMessage(RemoteMessage remoteMessage)
         {
@@ -139,25 +88,11 @@ namespace LocalNotificationsSample.iOS
             var text = remoteMessage.AppData.ValueForKey(new NSString("text"));
             debugAlert("" + title, "" + text);
         }
-
-        [Export("userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:")]
-        public void DidReceiveNotificationResponse(UNUserNotificationCenter center, UNNotificationResponse response, Action completionHandler)
+        [Export("messaging:didRefreshRegistrationToken:")]
+        public void DidRefreshRegistrationToken(Messaging mess, string token)
         {
-            System.Diagnostics.Debug.WriteLine(response.Notification); // this is used when app is in background and comes to foreground
-
-            var title = response.Notification.Request.Content.Title;
-            var body = response.Notification.Request.Content.Body;
-
-            var redirectView = "NotificationsListView";
-
-            if (redirectView != null || redirectView != "")
-            {
-                //App.loadView(redirectView);
-
-            }
+            Console.WriteLine(token);
         }
-
-
 
 
         private void connectFCM()
@@ -182,18 +117,5 @@ namespace LocalNotificationsSample.iOS
 
         }
 
-        //[Export("messaging:didRefreshRegistrationToken")]
-        public void DidRefreshRegistrationToken(Messaging messaging, string fcmToken)
-        {
-            // Obsolete interface
-            Console.WriteLine(messaging.FcmToken + " | " + fcmToken);
-        }
-        string token;
-        [Export("messaging:didReceiveRegistrationToken:")]
-        public void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
-        {
-            token = fcmToken.ToString();
-            
-        }
     }
 }
