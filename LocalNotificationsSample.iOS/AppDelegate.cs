@@ -18,8 +18,7 @@ namespace LocalNotificationsSample.iOS
             global::Xamarin.Forms.Forms.Init();
             this.ShinyFinishedLaunching(new MyStartup());
             LoadApplication(new App());
-
-
+           
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {
                 // For iOS 10 display notification (sent via APNS)
@@ -49,11 +48,13 @@ namespace LocalNotificationsSample.iOS
             try
             {
                 Firebase.Core.App.Configure();
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
+
             Messaging.SharedInstance.Delegate = this;
 
             Firebase.InstanceID.InstanceId.Notifications.ObserveTokenRefresh((sender, e) =>
@@ -91,17 +92,7 @@ namespace LocalNotificationsSample.iOS
 
         }
 
-        public override void OnActivated(UIApplication uiApplication)
-        {
-            global::Xamarin.Forms.Forms.Init();
 
-            base.OnActivated(uiApplication);
-        }
-
-        public override void DidEnterBackground(UIApplication uiApplication)
-        {
-
-        }
 
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
