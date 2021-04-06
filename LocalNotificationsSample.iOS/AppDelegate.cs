@@ -56,7 +56,7 @@ namespace LocalNotificationsSample.iOS
 
                 UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 
-                Firebase.Core.App.Configure();
+                //Firebase.Core.App.Configure();
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace LocalNotificationsSample.iOS
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
         {
-            Console.Write("TE");
+            this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
         }
             private void handlerd(InstanceIdResult result, NSError error)
         {
@@ -74,8 +74,9 @@ namespace LocalNotificationsSample.iOS
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
+            this.ShinyRegisteredForRemoteNotifications(deviceToken);
 #if DEBUG
-            Messaging.SharedInstance.SetApnsToken(deviceToken, ApnsTokenType.Sandbox);
+            //Messaging.SharedInstance.SetApnsToken(deviceToken, ApnsTokenType.Sandbox);
 #else
             Messaging.SharedInstance.SetApnsToken(deviceToken, ApnsTokenType.Production);
 #endif
