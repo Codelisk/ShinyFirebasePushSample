@@ -51,7 +51,7 @@ namespace LocalNotificationsSample.iOS
 
                 Firebase.InstanceID.InstanceId.Notifications.ObserveTokenRefresh((sender, e) =>
                 {
-                    var token = Firebase.InstanceID.InstanceId.SharedInstance.Token;
+                    Firebase.InstanceID.InstanceId.SharedInstance.GetInstanceId(handlerd);
                 });
 
                 UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
@@ -61,6 +61,15 @@ namespace LocalNotificationsSample.iOS
             catch (Exception ex)
             {
             }
+        }
+
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+        {
+            Console.Write("TE");
+        }
+            private void handlerd(InstanceIdResult result, NSError error)
+        {
+            var tokk=result.Token;
         }
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
