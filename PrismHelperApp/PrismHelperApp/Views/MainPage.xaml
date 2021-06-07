@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PrismHelperApp.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}">
+
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <Label Text="Welcome to Xamarin Forms and Prism!" />
+        <Entry Placeholder="Path" Text="{Binding Path}" />
+        <Button
+            Command="{Binding ChangeFilesCommand}"
+            HorizontalOptions="Center"
+            Text="Start"
+            VerticalOptions="Center" />
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,19 @@
+﻿<Window
+    x:Class="WpfPrismFileAdjust.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    Title="{Binding Title}"
+    Width="525"
+    Height="350"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <StackPanel>
+        <Label Content="Welcome to Xamarin Forms and Prism!" />
+        <TextBox Width="700" Text="{Binding Path}" />
+        <Button Command="{Binding ChangeFilesCommand}" Content="START" />
+        <Button
+            Margin="0,50,0,0"
+            Command="{Binding ChangeBackToReactiveCommand}"
+            Content="BackToReactive" />
+    </StackPanel>
+</Window>
